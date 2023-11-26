@@ -1,9 +1,9 @@
 package Code.Node;
 
-public class Games {
+public class NodeGames {
     String Name, currencyName;
     
-    public Games (String Name, String currencyName) {
+    public NodeGames (String Name, String currencyName) {
         this.Name = Name;
         this.currencyName = currencyName;
     }
