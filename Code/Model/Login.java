@@ -42,5 +42,7 @@ public class Login {
             }
 
         } while (!validAdmin && !validUser);
+
+        input.close();
     }
 }

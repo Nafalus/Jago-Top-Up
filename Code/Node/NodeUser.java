@@ -9,7 +9,7 @@ public class NodeUser extends NodeAdmin {
         this.pass = pass;
         this.pin = pin;
     }
-
+    
     public String getemail () {
         return this.email;
     }
