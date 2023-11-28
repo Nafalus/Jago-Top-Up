@@ -30,22 +30,6 @@ public class ModelUser{
         }
     }
 
-    // public void updateUser(String email,String pass,int pin) {
-    //     for (int i = 0; i < dataUser.size(); i++) {
-    //         if (email.equals(dataUser.get(i).getemail())) {
-    //             if (!"-".equals(dataUser.get(i).getemail())) {
-    //             dataUser.get(i).setEmail(email);
-    //             }
-    //             if (!"-".equals(dataUser.get(i).getPass())) {
-    //             dataUser.get(i).setPassword(pass);
-    //             }
-    //             if (dataUser.get(i).getPin() != -1) {
-    //                 dataUser.get(i).setPin(pin);
-    //             }
-    //         }
-    //     }
-    // }
-
     public ArrayList<NodeUser> getListDataUser () {
         return this.dataUser;
     }

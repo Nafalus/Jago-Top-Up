@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import Code.Node.NodeAdmin;
+import Code.NodeJSON.NodeJSONAdmin;
 
 public class ModelJSONAdmin {
     String fname = "Code/Database/DatabaseUser.json";
@@ -64,7 +65,7 @@ public class ModelJSONAdmin {
             ArrayList <NodeAdmin> listAdmin = new ArrayList<>();
             for (Object objectAdmin : arrayAdmin) {
                 JSONObject admin = (JSONObject) objectAdmin;
-                
+                String email = admin.get().toString();
             }
             return listAdmin;
         }
