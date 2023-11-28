@@ -13,6 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Code.Node.NodeAdmin;
+import Code.NodeJSON.NodeJSONAdmin;
 
 
 public class ModelJSONAdmin {
@@ -41,7 +42,7 @@ public class ModelJSONAdmin {
             JSONArray arrayAdmin = new JSONArray();
             for (NodeAdmin Admin : listAdmin){
                 JSONObject objAdmin = new JSONObject();
-                objAdmin.put("email", Admin.email);
+                objAdmin.put(NodeJSONAdmin.email, Admin.email);
                 objAdmin.put("pass", Admin.pass);
                 arrayAdmin.add(objAdmin);
             }
