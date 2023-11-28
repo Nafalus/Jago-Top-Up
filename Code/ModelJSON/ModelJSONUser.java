@@ -7,15 +7,18 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList; 
 
+
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import Code.Node.NodeAdmin;
+
+import Code.Node.NodeUser;
 
 
-public class ModelJSONAdmin {
+public class ModelJSONUser {
     String fname = "Code/Database/DatabaseUser.json";
 
     public boolean cekFile () {
@@ -34,26 +37,27 @@ public class ModelJSONAdmin {
         return output;
     }
     
-    public JSONArray convertArrayListToArrayJSON(ArrayList <NodeAdmin> listAdmin){
-        if (listAdmin == null){
+    public JSONArray convertArrayListToArrayJSON(ArrayList <NodeUser> listUser){
+        if (listUser == null){
             return null;
         }else {
-            JSONArray arrayAdmin = new JSONArray();
-            for (NodeAdmin Admin : listAdmin){
-                JSONObject objAdmin = new JSONObject();
-                objAdmin.put("email", Admin.email);
-                objAdmin.put("pass", Admin.pass);
-                arrayAdmin.add(objAdmin);
+            JSONArray arrayUser = new JSONArray();
+            for (NodeUser USer : listUser){
+                JSONObject objUser = new JSONObject();
+                objUser.put("email",USer.email);
+                objUser.put("pass",USer.pass) ;
+                objUser.put("pin",USer.pin) ; 
+                arrayUser.add(objUser);
             }
-            return arrayAdmin;
+            return arrayUser;
         }
     }
 
-    public void writeFileJSON(ArrayList <NodeAdmin> listAdmin){
-        JSONArray arrayAdmin = convertArrayListToArrayJSON(listAdmin);
+    public void writeFileJSON(ArrayList <NodeUser> listUser){
+        JSONArray arrayUser = convertArrayListToArrayJSON(listUser);
         try {
             FileWriter file = new FileWriter(fname);
-            file.write(arrayAdmin.toJSONString());
+            file.write(arrayUser.toJSONString());
             file.flush();
             file.close();
         }
@@ -63,17 +67,17 @@ public class ModelJSONAdmin {
         }
     }
 
-    public ArrayList <NodeAdmin> readFromJSON () {
+    public ArrayList <NodeUser> readFromJSON () {
         if (cekFile() == false){
             return null;
         }
-        ArrayList listAdmin = null;
+        ArrayList listUser = null;
         JSONParser parser = new JSONParser();
 
         try {
             Reader reader = new FileReader(fname);
-            JSONArray arrayAdmin = (JSONArray) parser.parse(reader);
-            listAdmin = convertJSONArrayToArrayList(arrayAdmin);
+            JSONArray arrayUser = (JSONArray) parser.parse(reader);
+            listUser = convertJSONArrayToArrayList(arrayUser);
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException (e);
@@ -84,22 +88,23 @@ public class ModelJSONAdmin {
         catch (ParseException e) {
             throw new RuntimeException (e);
         }
-        return listAdmin;
+        return listUser;
     }
 
-    public ArrayList <NodeAdmin> convertJSONArrayToArrayList (JSONArray arrayAdmin) {
-        if (arrayAdmin == null) {
+    public ArrayList <NodeUser> convertJSONArrayToArrayList (JSONArray arrayUser) {
+        if (arrayUser == null) {
             return null;
         }
         else {
-            ArrayList <NodeAdmin> listAdmin = new ArrayList<>();
-            for (Object objectAdmin : arrayAdmin) {
-                JSONObject Admin = (JSONObject) objectAdmin;
-                String email = Admin.get("email").toString();
-                String pass = Admin.get("pass").toString();
-                listAdmin.add(new NodeAdmin(email, pass));
+            ArrayList <NodeUser> listUser = new ArrayList<>();
+            for (Object objUser : arrayUser) {
+                JSONObject User = (JSONObject) objUser;
+                String email = User.get("email").toString();
+                String pass = User.get("pass").toString();
+                int pin = Integer.parseInt(User.get("pin").toString());
+                listUser.add(new NodeUser(email, pass,pin));
             }
-            return listAdmin;
+            return listUser;
         }
     }
 }

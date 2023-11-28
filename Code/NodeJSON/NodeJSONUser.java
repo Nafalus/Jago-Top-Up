@@ -5,7 +5,7 @@ import Code.NodeJSON.NodeJSONUser;
 
 
 public class NodeJSONUser extends NodeJSONAdmin {
-    int pin;
+    public int pin;
     
     public NodeJSONUser (String email,String pass,int pin) {
         super(email,pass);
