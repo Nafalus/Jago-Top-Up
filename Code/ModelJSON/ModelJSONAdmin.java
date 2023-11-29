@@ -103,4 +103,10 @@ public class ModelJSONAdmin {
             return listAdmin;
         }
     }
+
+    public void Insert (NodeAdmin paramInsert) {
+        ArrayList <NodeAdmin> listAdmin = readFromJSON();
+        listAdmin.add(new NodeAdmin(paramInsert.email, paramInsert.pass));
+        writeFileJSON(listAdmin);
+    }
 }

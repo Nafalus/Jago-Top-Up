@@ -2,8 +2,6 @@ package Code.NodeJSON;
 import Code.NodeJSON.NodeJSONUser;
 // package Code.NodeJSON.NodeJSONAdmin;
 
-
-
 public class NodeJSONUser extends NodeJSONAdmin {
     public int pin;
     
