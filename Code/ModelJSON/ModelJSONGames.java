@@ -7,17 +7,19 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList; 
 
+
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import Code.Node.NodeAdmin;
-import Code.NodeJSON.NodeJSONAdmin;
+import Code.Node.NodeGames;
+import Code.Node.NodeUser;
 
 
-public class ModelJSONAdmin {
-    String fname = "Code/Database/DatabaseAdmin.json";
+public class ModelJSONGames {
+    String fname = "Code/Database/DatabaseGames.json";
 
     public boolean cekFile () {
         boolean output = false;
@@ -35,26 +37,26 @@ public class ModelJSONAdmin {
         return output;
     }
     
-    public JSONArray convertArrayListToArrayJSON(ArrayList <NodeAdmin> listAdmin){
-        if (listAdmin == null){
+    public JSONArray convertArrayListToArrayJSON(ArrayList <NodeGames> listGame){
+        if (listGame == null){
             return null;
         }else {
-            JSONArray arrayAdmin = new JSONArray();
-            for (NodeAdmin Admin : listAdmin){
-                JSONObject objAdmin = new JSONObject();
-                objAdmin.put("email", Admin.email);
-                objAdmin.put("pass", Admin.pass);
-                arrayAdmin.add(objAdmin);
+            JSONArray arrayGame = new JSONArray();
+            for (NodeGames Game : listGame){
+                JSONObject objGame = new JSONObject();
+                objGame.put("nameGame", Game.nameGame);
+                objGame.put("currencyGame", Game.currencyName); 
+                arrayGame.add(objGame);
             }
-            return arrayAdmin;
+            return arrayGame;
         }
     }
 
-    public void writeFileJSON(ArrayList <NodeAdmin> listAdmin){
-        JSONArray arrayAdmin = convertArrayListToArrayJSON(listAdmin);
+    public void writeFileJSON(ArrayList <NodeGames> listGame){
+        JSONArray arrayGame = convertArrayListToArrayJSON(listGame);
         try {
             FileWriter file = new FileWriter(fname);
-            file.write(arrayAdmin.toJSONString());
+            file.write(arrayGame.toJSONString());
             file.flush();
             file.close();
         }
@@ -64,17 +66,17 @@ public class ModelJSONAdmin {
         }
     }
 
-    public ArrayList <NodeAdmin> readFromJSON () {
+    public ArrayList <NodeGames> readFromJSON () {
         if (cekFile() == false){
             return null;
         }
-        ArrayList listAdmin = null;
+        ArrayList listGame = null;
         JSONParser parser = new JSONParser();
 
         try {
             Reader reader = new FileReader(fname);
-            JSONArray arrayAdmin = (JSONArray) parser.parse(reader);
-            listAdmin = convertJSONArrayToArrayList(arrayAdmin);
+            JSONArray arrayGame = (JSONArray) parser.parse(reader);
+            listGame = convertJSONArrayToArrayList(arrayGame);
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException (e);
@@ -85,22 +87,22 @@ public class ModelJSONAdmin {
         catch (ParseException e) {
             throw new RuntimeException (e);
         }
-        return listAdmin;
+        return listGame;
     }
 
-    public ArrayList <NodeAdmin> convertJSONArrayToArrayList (JSONArray arrayAdmin) {
-        if (arrayAdmin == null) {
+    public ArrayList <NodeGames> convertJSONArrayToArrayList (JSONArray arrayGame) {
+        if (arrayGame == null) {
             return null;
         }
         else {
-            ArrayList <NodeAdmin> listAdmin = new ArrayList<>();
-            for (Object objectAdmin : arrayAdmin) {
-                JSONObject Admin = (JSONObject) objectAdmin;
-                String email = Admin.get("email").toString();
-                String pass = Admin.get("pass").toString();
-                listAdmin.add(new NodeAdmin(email, pass));
+            ArrayList <NodeGames> listGame = new ArrayList<>();
+            for (Object objGame : arrayGame) {
+                JSONObject Game = (JSONObject) objGame;
+                String nameGame = Game.get("nameGame").toString();
+                String currencyName = Game.get("currencyGame").toString();
+                listGame.add(new NodeGames(nameGame,currencyName));
             }
-            return listAdmin;
+            return listGame;
         }
     }
 }

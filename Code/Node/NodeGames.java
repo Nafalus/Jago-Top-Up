@@ -1,7 +1,8 @@
 package Code.Node;
 
 public class NodeGames {
-    String nameGame, currencyName;
+    public String nameGame;
+    public String currencyName;
     
     public NodeGames (String nameGame, String currencyName) {
         this.nameGame = nameGame;
