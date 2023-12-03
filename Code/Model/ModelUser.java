@@ -2,6 +2,7 @@ package Code.Model;
 
 import java.util.ArrayList;
 
+import Code.ModelJSON.ModelJSONUser;
 // import Node
 import Code.Node.NodeUser;
 
@@ -11,21 +12,33 @@ public class ModelUser{
     public ModelUser(){
         ModelUser.dataUser = new ArrayList<>();
     }
-    public void RegisterUser(String email,String pass,int pin){
-        dataUser.add(new NodeUser (email,pass,pin));
+    public void RegisterUser(String email,String pass,int pin,double saldo){
+        dataUser.add(new NodeUser (email,pass,pin,saldo));
     }
     
+    // Done
     public void ViewAllUser(){
-        for (int i = 0; i < dataUser.size(); i++){
-           ModelUser.dataUser.get(i).ViewUser();
-           System.out.println("--------------------");
+        ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
+        if (listUser != null){
+            for (NodeUser user : listUser){
+                user.ViewUser();
+                System.out.println("--------------------");
+            }
         }
     }
 
+
+    // Done
     public void DeleteUSer(String email){
-        for (int i=0; i< dataUser.size(); i++){
-            if (email.equals(dataUser.get(i).getemail())){
-                dataUser.remove(i);
+        ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
+        if (listUser != null){
+            for (int i = 0; i < listUser.size(); i++ ){
+                NodeUser User = listUser.get(i);
+                if (email.equals(User.getemail())){
+                    listUser.remove(i);
+                    new ModelJSONUser().writeFileJSON(listUser);
+                    break;
+                }
             }
         }
     }

@@ -47,6 +47,7 @@ public class ModelJSONUser {
                 objUser.put("email",USer.email);
                 objUser.put("pass",USer.pass) ;
                 objUser.put("pin",USer.pin) ; 
+                objUser.put("saldo", USer.saldo);
                 arrayUser.add(objUser);
             }
             return arrayUser;
@@ -102,7 +103,8 @@ public class ModelJSONUser {
                 String email = User.get("email").toString();
                 String pass = User.get("pass").toString();
                 int pin = Integer.parseInt(User.get("pin").toString());
-                listUser.add(new NodeUser(email, pass,pin));
+                double saldo = Double.parseDouble(User.get(("saldo")).toString());
+                listUser.add(new NodeUser(email, pass,pin,saldo));
             }
             return listUser;
         }

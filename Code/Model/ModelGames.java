@@ -20,21 +20,12 @@ public class ModelGames {
     }
     
 
-    // belum
-    public void DeleteGames(String nameGame) {
-        for (int i = 0; i < dataGames.size(); i++) {
-            if (nameGame.equalsIgnoreCase(dataGames.get(i).getNameGame())) {
-                dataGames.remove(i);
-            }
-        }
-    }
-
-
-
     // Done
     public void ViewAllGames() {
         ArrayList <NodeGames> listGames = new ModelJSONGames().readFromJSON();
-        if (listGames != null) {
+        if (listGames == null) {
+            System.out.println("Data Game Kosong");
+        }else{
             for (NodeGames game : listGames) {
                 game.viewGame();
                 System.out.println("--------------------");
@@ -42,19 +33,33 @@ public class ModelGames {
         }
     }
 
-
-    // Done Mungkin belum cek
-    public void searchGame(NodeGames paramInsert) {
+    // Done
+    public void DeleteGame(String nameGame) {
+        ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        if (listGames != null) {
+            for (int i = 0; i < listGames.size(); i++) {
+                NodeGames game = listGames.get(i);
+                if (game.getNameGame().equalsIgnoreCase(nameGame)) {
+                    listGames.remove(i);
+                    new ModelJSONGames().writeFileJSON(listGames);
+                    break;
+                }
+            }
+        }
+    }
+    
+    
+    // Done
+    public void searchGame(String nameGame) {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
         if (listGames != null) {
             for (NodeGames game : listGames) {
-                if (game.getNameGame().equalsIgnoreCase(paramInsert.getNameGame())) {
+                if (game.getNameGame().equalsIgnoreCase(nameGame)) {
                     game.viewGame();
                     break;
                 }
             }
         }
-        System.out.println("Game Tidak Ditemukan");
     }
     
 }

@@ -2,12 +2,14 @@ package Code.Node;
 
 public class NodeUser extends NodeAdmin {
     public int pin;
+    public double saldo;
     
-    public NodeUser (String email, String pass, int pin) {
+    public NodeUser (String email, String pass, int pin,double saldo) {
         super(email,pass);
         this.email = email;
         this.pass = pass;
         this.pin = pin;
+        this.saldo = saldo;
     }
     
     public String getemail () {
@@ -36,7 +38,6 @@ public class NodeUser extends NodeAdmin {
 
     public void ViewUser(){
         System.out.println("Email USer : "+this.email);
-        System.out.println("Password User : "+this.pass);
-        System.out.println("Pin User : "+pin);
+        System.out.println("Saldo User : "+saldo);
     }
 }
