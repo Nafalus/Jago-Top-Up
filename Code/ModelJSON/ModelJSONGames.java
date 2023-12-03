@@ -37,15 +37,25 @@ public class ModelJSONGames {
         return output;
     }
     
-    public JSONArray convertArrayListToArrayJSON(ArrayList <NodeGames> listGame){
-        if (listGame == null){
+    public JSONArray convertArrayListToArrayJSON(ArrayList<NodeGames> listGame) {
+        if (listGame == null) {
             return null;
-        }else {
+        } else {
             JSONArray arrayGame = new JSONArray();
-            for (NodeGames Game : listGame){
+            for (NodeGames game : listGame) {
                 JSONObject objGame = new JSONObject();
-                objGame.put("nameGame", Game.nameGame);
-                objGame.put("currencyGame", Game.currencyName); 
+                objGame.put("nameGame", game.nameGame);
+                objGame.put("currencyGame", game.currencyName);
+
+                JSONArray itemsArray = new JSONArray();
+                for (NodeGames.Item item : game.getItems()) {
+                    JSONObject objItem = new JSONObject();
+                    objItem.put("itemName", item.itemName);
+                    objItem.put("itemPrice", item.itemPrice);
+                    itemsArray.add(objItem);
+                }
+                objGame.put("items", itemsArray);
+
                 arrayGame.add(objGame);
             }
             return arrayGame;
@@ -66,41 +76,49 @@ public class ModelJSONGames {
         }
     }
 
-    public ArrayList <NodeGames> readFromJSON () {
-        if (cekFile() == false){
+    public ArrayList<NodeGames> readFromJSON() {
+        if (cekFile() == false) {
             return null;
         }
-        ArrayList listGame = null;
+        ArrayList<NodeGames> listGame = null;
         JSONParser parser = new JSONParser();
 
         try {
             Reader reader = new FileReader(fname);
             JSONArray arrayGame = (JSONArray) parser.parse(reader);
             listGame = convertJSONArrayToArrayList(arrayGame);
-        }
-        catch (FileNotFoundException e) {
-            throw new RuntimeException (e);
-        }
-        catch (IOException e) {
-            throw new RuntimeException (e);
-        }
-        catch (ParseException e) {
-            throw new RuntimeException (e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
         return listGame;
     }
 
-    public ArrayList <NodeGames> convertJSONArrayToArrayList (JSONArray arrayGame) {
+     public ArrayList<NodeGames> convertJSONArrayToArrayList(JSONArray arrayGame) {
         if (arrayGame == null) {
             return null;
-        }
-        else {
-            ArrayList <NodeGames> listGame = new ArrayList<>();
+        } else {
+            ArrayList<NodeGames> listGame = new ArrayList<>();
             for (Object objGame : arrayGame) {
-                JSONObject Game = (JSONObject) objGame;
-                String nameGame = Game.get("nameGame").toString();
-                String currencyName = Game.get("currencyGame").toString();
-                listGame.add(new NodeGames(nameGame,currencyName));
+                JSONObject jsonGame = (JSONObject) objGame;
+                String nameGame = jsonGame.get("nameGame").toString();
+                String currencyName = jsonGame.get("currencyGame").toString();
+                NodeGames item = new NodeGames(nameGame, currencyName);
+
+                JSONArray jsonItems = (JSONArray) jsonGame.get("items");
+                if (jsonItems != null) {
+                    for (Object objItem : jsonItems) {
+                        JSONObject jsonItem = (JSONObject) objItem;
+                        String itemName = jsonItem.get("itemName").toString();
+                        double itemPrice = Double.parseDouble(jsonItem.get("itemPrice").toString());
+                        item.addItem(itemName, itemPrice);
+                    }
+                }
+
+                listGame.add(item);
             }
             return listGame;
         }

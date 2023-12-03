@@ -2,53 +2,60 @@ package Code.Model;
 
 import java.util.ArrayList;
 
-// import Node
-
+import Code.ModelJSON.ModelJSONGames;
+import Code.Node.NodeAdmin;
 import Code.Node.NodeGames;
-import Code.Controller.Controller;
-public class ModelGames{
-    public ArrayList <NodeGames> dataGames;
-    Controller firstData;
 
-    public ModelGames(){
+public class ModelGames {
+    public ArrayList<NodeGames> dataGames;
+
+    public ModelGames() {
         this.dataGames = new ArrayList<>();
     }
 
-    public void insertAdmin (String name,String currencyName) {
-        dataGames.add(new NodeGames(name, currencyName)); 
+
+    // Done
+    public void insertGames(String name, String currencyName) {
+        dataGames.add(new NodeGames(name, currencyName));
     }
+    
 
-    public void ViewAllAdmin(){
-       for (int i = 0; i < this.dataGames.size(); i++){
-            this.dataGames.get(i).ViewGames();
-            System.out.println("--------------------");
-       }
-    }    
-
-    public void DeleteUSer(String nameGame){
-        for (int i=0; i< dataGames.size(); i++){
-            if (nameGame.equalsIgnoreCase(dataGames.get(i).getNamegame())){
+    // belum
+    public void DeleteGames(String nameGame) {
+        for (int i = 0; i < dataGames.size(); i++) {
+            if (nameGame.equalsIgnoreCase(dataGames.get(i).getNameGame())) {
                 dataGames.remove(i);
             }
         }
     }
 
-    // public void updateHargaGame(String nameGame){
-    //     for (int i = 0; i < dataGames.size(); i++){
-    //         if (nameGame.equalsIgnoreCase(dataGames.get(i).getNamegame())){
-    //             nameGame.get(i).setnameGame()
-    //         }
-    //     }
-    // }
 
-    public NodeGames searchGame(String nameGame){
-        for (int i = 0; i < dataGames.size(); i++){
-            if (nameGame.equalsIgnoreCase(dataGames.get(i).getNamegame())){
-                return dataGames.get(i);
+
+    // Done
+    public void ViewAllGames() {
+        ArrayList <NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        if (listGames != null) {
+            for (NodeGames game : listGames) {
+                game.viewGame();
+                System.out.println("--------------------");
             }
         }
-        return null;
     }
 
 
+    // Done Mungkin belum cek
+    public void searchGame(NodeGames paramInsert) {
+        ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        if (listGames != null) {
+            for (NodeGames game : listGames) {
+                if (game.getNameGame().equalsIgnoreCase(paramInsert.getNameGame())) {
+                    game.viewGame();
+                    break;
+                }
+            }
+        }
+        System.out.println("Game Tidak Ditemukan");
+    }
+    
 }
+
