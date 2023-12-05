@@ -34,16 +34,25 @@ public class ModelGames {
     // Done
     public void DeleteGame(String nameGame) {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        boolean found = false;
         if (listGames != null) {
             for (NodeGames game : listGames) {
-                if (game.getNameGame().equalsIgnoreCase(nameGame)) {
+                if (game.getNameGame().equals(nameGame)) {
                     listGames.remove(game);
+                    found = true;
                     new ModelJSONGames().writeFileJSON(listGames);
                     break;
-                }else{
-                    System.out.println("Game Tidak Dapat Ditemukan / Dihapus");
                 }
+                // else{
+                //     System.out.println("Game Tidak Dapat Ditemukan / Dihapus");
+                // }
             }
+            if (!found){
+                System.out.println("Game Tidak Dapat Ditemukan / Dihapus");
+            }
+        }
+        else {
+            System.out.println("List Game Kosong");
         }
     }
     
@@ -51,15 +60,21 @@ public class ModelGames {
     // Done
     public void searchGame(String nameGame) {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        boolean found = false;
         if (listGames != null) {
             for (NodeGames game : listGames) {
                 if (game.getNameGame().equals(nameGame)) {
+                    found = true;
                     game.viewGame();
                     break;
-                }else{
-                    System.out.println("Game Tidak Dapat Ditemukan");
                 }
             }
+            if (!found){
+                System.out.println("Game Tidak Dapat Ditemukan / Dihapus");
+            }
+        }
+        else {
+            System.out.println("List Game Kosong");
         }
     }
 

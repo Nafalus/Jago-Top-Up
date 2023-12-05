@@ -24,7 +24,8 @@ public class MenuAdmin {
         System.out.println("3. Hapus Game");
         System.out.println("4. Lihat Game");
         System.out.println("5. Lihat User");
-        System.out.println("6. Log Out");
+        System.out.println("6. Search Game");
+        System.out.println("7. Logout");
         System.out.print("Pilih Menu : ");
         pilih = input.nextInt();
         
@@ -98,7 +99,7 @@ public class MenuAdmin {
                 modelgames.updateItemPrice(namegame);;
                 break;
             case 3:
-            
+                input.nextLine();
                 System.out.println("Masukkan Nama Game Yang ingin Dihapus : ");
                 String gameName = input.nextLine();
                 modelgames.DeleteGame(gameName);
@@ -111,6 +112,10 @@ public class MenuAdmin {
                 modeluser.ViewAllUser();
                 break;
             case 6:
+                input.nextLine();
+                System.out.print("Input Nama Game :");
+                String namaGame = input.nextLine();
+                modelgames.searchGame(namaGame);
                 break;
             default:
                 break;

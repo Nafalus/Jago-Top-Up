@@ -36,10 +36,11 @@ public class Main {
         // modeluser.ViewAllUser();
         // modeluser.DeleteUser("Nopal Penyepong Miku");
         // System.out.println("Admin Terdaftar");
-        modeluser.ViewAllUser();
+        // modeluser.ViewAllUser();
 
         // modelgame.ViewAllGames();
         menuadmin.menuAdmin();
+        // modelgame.DeleteGame("genshin");
         
     
 }
