@@ -15,7 +15,7 @@ public class Controller {
     }
 
     public NodeUser getEmailPass () {
-        NodeUser temp = new NodeUser(this.dataControllerAdmin.email, this.dataControllerAdmin.pass, 0);
+        NodeUser temp = new NodeUser(this.dataControllerAdmin.email, this.dataControllerAdmin.pass);
         return temp;
     }
 }

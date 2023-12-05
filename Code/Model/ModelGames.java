@@ -2,8 +2,8 @@ package Code.Model;
 
 import java.util.ArrayList;
 
+import java.util.Scanner;
 import Code.ModelJSON.ModelJSONGames;
-import Code.Node.NodeAdmin;
 import Code.Node.NodeGames;
 
 public class ModelGames {
@@ -23,10 +23,8 @@ public class ModelGames {
     // Done
     public void ViewAllGames() {
         ArrayList <NodeGames> listGames = new ModelJSONGames().readFromJSON();
-        if (listGames == null) {
-            System.out.println("Data Game Kosong");
-        }else{
-            for (NodeGames game : listGames) {
+        if (listGames != null) {
+             for (NodeGames game : listGames) {
                 game.viewGame();
                 System.out.println("--------------------");
             }
@@ -37,12 +35,13 @@ public class ModelGames {
     public void DeleteGame(String nameGame) {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
         if (listGames != null) {
-            for (int i = 0; i < listGames.size(); i++) {
-                NodeGames game = listGames.get(i);
+            for (NodeGames game : listGames) {
                 if (game.getNameGame().equalsIgnoreCase(nameGame)) {
-                    listGames.remove(i);
+                    listGames.remove(game);
                     new ModelJSONGames().writeFileJSON(listGames);
                     break;
+                }else{
+                    System.out.println("Game Tidak Dapat Ditemukan / Dihapus");
                 }
             }
         }
@@ -54,13 +53,44 @@ public class ModelGames {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
         if (listGames != null) {
             for (NodeGames game : listGames) {
-                if (game.getNameGame().equalsIgnoreCase(nameGame)) {
+                if (game.getNameGame().equals(nameGame)) {
                     game.viewGame();
                     break;
+                }else{
+                    System.out.println("Game Tidak Dapat Ditemukan");
                 }
             }
         }
     }
-    
+
+
+    // Done
+    public void updateItemPrice(String namegame) {
+        ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        if (listGames != null) {
+            for (NodeGames game : listGames) {
+                if (game.getNameGame().equalsIgnoreCase(namegame)) {
+                    for (NodeGames.Item item : game.getItems()) {
+                        System.out.println("Masukkan Nama item : ");
+                        String itemName = new Scanner(System.in).nextLine();
+                        if (item.itemName.equalsIgnoreCase(itemName)) {
+                            Scanner input = new Scanner(System.in);
+                            input.nextLine();
+                            System.out.println("Masukkan Harga Baru : ");
+                            double newPrice = new Scanner(System.in).nextDouble();
+                            item.setItemPrice(newPrice);
+                            break;
+                        }else{
+                            System.out.println("Item Tidak Ditemukan");
+                        }
+                    }
+                    new ModelJSONGames().writeFileJSON(listGames);
+                    break;
+                }else {
+                    System.out.println("Game Tidak Dapat Ditemukan");
+                }
+            }
+        } 
+    }
 }
 

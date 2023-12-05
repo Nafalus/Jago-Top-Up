@@ -14,15 +14,15 @@ public class NodeGames {
     }
 
     public String getNameGame() {
-        return this.nameGame;
+        return nameGame;
     }
 
     public String getCurrencyName() {
-        return this.currencyName;
+        return currencyName;
     }
 
-    public ArrayList<Item> getItems() {
-        return this.items;
+    public ArrayList <Item> getItems() {
+        return items;
     }
 
     public void addItem(String itemName, double itemPrice) {
@@ -44,6 +44,14 @@ public class NodeGames {
 
         public Item(String itemName, double itemPrice) {
             this.itemName = itemName;
+            this.itemPrice = itemPrice;
+        }
+
+        public void setItemName(String itemName) {
+            this.itemName = itemName;
+        }
+
+        public void setItemPrice(double itemPrice) {
             this.itemPrice = itemPrice;
         }
     }

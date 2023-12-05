@@ -1,8 +1,8 @@
 package Code.NodeJSON;
 
 public class NodeJSONAdmin {
-    public static String email;
-    public static String pass;
+    public String email;
+    public String pass;
     
     public NodeJSONAdmin (String email, String pass) {
         this.email = email;

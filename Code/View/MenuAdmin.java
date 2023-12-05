@@ -14,8 +14,10 @@ public class MenuAdmin {
 
 
 
-    public MenuAdmin(){
+    public void menuAdmin(){
         Scanner input = new Scanner(System.in);
+        int pilih;
+        do{
         System.out.println("MENU ADMIN");
         System.out.println("1. Tambah Game");
         System.out.println("2. Edit Game");
@@ -24,7 +26,8 @@ public class MenuAdmin {
         System.out.println("5. Lihat User");
         System.out.println("6. Log Out");
         System.out.print("Pilih Menu : ");
-        int pilih = input.nextInt();
+        pilih = input.nextInt();
+        
 
         switch (pilih) {
             case 1:
@@ -36,6 +39,7 @@ public class MenuAdmin {
                 }
 
                 NodeGames newGame = new NodeGames(null, null);
+                input.nextLine();
                 System.out.println("Masukkan Nama Game Baru : ");
                 newGame.nameGame = input.nextLine();
                 System.out.println("Masukkan Currency Game Baru : ");
@@ -72,8 +76,7 @@ public class MenuAdmin {
 
                 // Save data ke Json
                 listGames.add(newGame);
-                modelJSONGames.writeFileJSON(listGames);
-
+                
                 // Cetak Data
                 System.out.println("LIST ITEM DAN HARGA");
                 for (NodeGames game : listGames) {
@@ -85,9 +88,14 @@ public class MenuAdmin {
                     }
                     System.out.println("-----------------------");
                 }
-            
+                
+                modelJSONGames.writeFileJSON(listGames);
                 break;
             case 2:
+                input.nextLine();
+                System.out.println("Masukkan Nama Game Yang ingin DiEdit : ");
+                String namegame = input.nextLine();
+                modelgames.updateItemPrice(namegame);;
                 break;
             case 3:
             
@@ -108,5 +116,6 @@ public class MenuAdmin {
                 break;
         }
         
-    }
+    }while(pilih !=6);
+}
 }

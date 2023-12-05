@@ -12,8 +12,8 @@ public class ModelUser{
     public ModelUser(){
         ModelUser.dataUser = new ArrayList<>();
     }
-    public void RegisterUser(String email,String pass,int pin,double saldo){
-        dataUser.add(new NodeUser (email,pass,pin,saldo));
+    public void RegisterUser(String email,String pass,int pin){
+        dataUser.add(new NodeUser (email,pass,pin));
     }
     
     // Done
@@ -21,7 +21,9 @@ public class ModelUser{
         ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
         if (listUser != null){
             for (NodeUser user : listUser){
-                user.ViewUser();
+                System.out.println("Email User : "+user.getEmail());
+                System.out.println("Password User : "+user.getPass());
+                System.out.println("Pin User : "+user.getPin());
                 System.out.println("--------------------");
             }
         }
@@ -29,19 +31,19 @@ public class ModelUser{
 
 
     // Done
-    public void DeleteUSer(String email){
-        ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
-        if (listUser != null){
-            for (int i = 0; i < listUser.size(); i++ ){
-                NodeUser User = listUser.get(i);
-                if (email.equals(User.getemail())){
-                    listUser.remove(i);
+    public void DeleteUser(String email) {
+        ArrayList<NodeUser> listUser = new ModelJSONUser().readFromJSON();
+        if (listUser != null) {
+            for (NodeUser user : listUser) {
+                if (email.equals(user.getEmail())) {
+                    listUser.remove(user);
                     new ModelJSONUser().writeFileJSON(listUser);
                     break;
                 }
             }
         }
     }
+
 
     public ArrayList<NodeUser> getListDataUser () {
         return this.dataUser;
