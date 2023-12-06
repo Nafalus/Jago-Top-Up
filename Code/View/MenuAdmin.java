@@ -48,9 +48,9 @@ public class MenuAdmin {
                 System.out.println("LIST USER");
                 modeluser.ViewAllUser();
                 break;
-            case 6:
-                System.out.println("Log Out");
-                break;
+            // case 6:
+            //     System.out.println("Log Out");
+            //     break;
             default:
                 System.out.println("Pilih menu yang tersedia");
                 break;

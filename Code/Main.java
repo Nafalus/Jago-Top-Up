@@ -30,24 +30,25 @@ public class Main {
 
         int pilih;
         do{
-        System.out.println("1. Daftar ");
-        System.out.println("2. Login");
-        System.out.println("3. Keluar");
-        System.out.println("Masukkan Pilihan");
-        pilih = input.nextInt();
+            input.nextLine();
+            System.out.println("1. Daftar ");
+            System.out.println("2. Login");
+            System.out.println("3. Keluar");
+            System.out.println("Masukkan Pilihan");
+            pilih = input.nextInt();
 
-        switch (pilih) {
-            case 1:
-                modeluser.daftarAkun();
-                break;
-            case 2:
-                login.ValidasiLogin();
-                break;
-            case 3:
-                System.out.println("Log Out");
-            default:
-                break;
-        }
+            switch (pilih) {
+                case 1:
+                    modeluser.daftarAkun();
+                    break;
+                case 2:
+                    login.ValidasiLogin();
+                    break;
+                case 3:
+                    System.out.println("Log Out");
+                default:
+                    break;
+            }
         }while ( pilih != 3);
 
         input.close();
