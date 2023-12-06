@@ -3,13 +3,20 @@ package Code.Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Code.Node.NodeAdmin;
 import Code.Node.NodeUser;
+import Code.View.MenuAdmin;
+import Code.View.MenuUser;
 import Code.Controller.Controller;
 // import Code.Model.ModelUser;
+import Code.ModelJSON.ModelJSONAdmin;
+import Code.ModelJSON.ModelJSONUser;
 
 public class Login {
     ArrayList <NodeUser> dataUser;
     public boolean validAdmin, validUser;
+    MenuUser menuuser = new MenuUser();
+    MenuAdmin menuadmin = new MenuAdmin();
 
     public Login () {
         validAdmin = false;
@@ -44,5 +51,32 @@ public class Login {
         } while (!validAdmin && !validUser);
 
         input.close();
+    }
+
+    public void ValidasiLogin(){
+        Scanner input = new Scanner(System.in);
+         System.out.println("Masukkan Email : ");
+                String email = input.nextLine();
+                System.out.println("Masukkan Password : ");
+                String pass = input.nextLine();
+                ArrayList <NodeUser> listuser = new ModelJSONUser().readFromJSON();
+                if (listuser != null) {
+                    for (NodeUser user : listuser) {
+                        if (user.getEmail().equalsIgnoreCase(email) && user.getPass().equalsIgnoreCase(pass)){
+                            menuuser.menuUser();
+                        }
+                    }
+                }
+
+                ArrayList <NodeAdmin> listAdmins = new ModelJSONAdmin().readFromJSON();
+                if (listAdmins != null) {
+                    for (NodeAdmin admin : listAdmins) {
+                        if (admin.getemail().equalsIgnoreCase(email) && admin.getPass().equalsIgnoreCase(pass)){
+                            menuadmin.menuAdmin();
+                        }else{
+                            System.out.println("Email atau Password Salah");
+                        }
+                    }
+                }
     }
 }

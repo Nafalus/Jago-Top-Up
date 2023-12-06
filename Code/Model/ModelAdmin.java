@@ -5,6 +5,7 @@ import java.util.ArrayList;
 // import Node
 import Code.Node.NodeAdmin;
 import Code.Controller.Controller;
+import Code.ModelJSON.ModelJSONAdmin;
 public class ModelAdmin{
     public ArrayList <NodeAdmin> dataAdmin;
     Controller firstData;
@@ -20,9 +21,12 @@ public class ModelAdmin{
     }
 
     public void ViewAllAdmin(){
-       for (int i = 0; i < this.dataAdmin.size(); i++){
-            this.dataAdmin.get(i).ViewAdmin();
-            System.out.println("--------------------");
+       ArrayList <NodeAdmin> listAdmin = new ModelJSONAdmin().readFromJSON();
+       if (listAdmin != null) {
+       for (NodeAdmin admin : listAdmin) {
+           System.out.println("Email Admin : "+admin.getemail());
+           System.out.println("Password Admin : "+admin.getPass());
+       }
        }
     }    
 }

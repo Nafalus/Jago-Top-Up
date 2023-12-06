@@ -11,15 +11,15 @@ public class NodeUser extends NodeAdmin {
     }
     
     public String getEmail () {
-        return this.email;
+        return email;
     }
 
     public String getPass () {
-        return this.pass;
+        return pass;
     }
     
     public int getPin (){
-        return this.pin;
+        return pin;
     }
 
     public void setEmail(String email){
