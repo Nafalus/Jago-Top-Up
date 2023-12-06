@@ -15,10 +15,4 @@ public class NodeAdmin {
     public String getPass () {
         return this.pass;
     }
-
-    public void ViewAdmin(){
-        System.out.println("Email Admin : " + this.email);
-        System.out.println("Password Admin : " + this.pass);
-
-}
 }

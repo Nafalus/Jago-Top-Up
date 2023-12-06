@@ -2,11 +2,10 @@ package Code.View;
 
 import java.util.Scanner;
 
-import Code.Model.ModelGames;
 
 public class MenuUser {
 
-    public static void  MenuUser() {
+    public void  menuUser() {
         Scanner input = new Scanner(System.in);
         int pilih;
         do{
@@ -37,7 +36,7 @@ public class MenuUser {
                 break;
             }
         }while(pilih != 5);
+        
+        input.close();
     }
-
-    
 }

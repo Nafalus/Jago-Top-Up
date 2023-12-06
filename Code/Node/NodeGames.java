@@ -25,19 +25,13 @@ public class NodeGames {
         return items;
     }
 
+   
+
     public void addItem(String itemName, double itemPrice) {
         this.items.add(new Item(itemName, itemPrice));
     }
 
-    public void viewGame() {
-        System.out.println("Nama Game: " + nameGame);
-        System.out.println("Nama Currency Game: " + currencyName);
-        System.out.println("Items:");
-        for (Item item : items) {
-            System.out.println("  - " + item.itemName + ": Rp" + item.itemPrice);
-        }
-    }
-
+    
     public static class Item {
         public String itemName;
         public double itemPrice;
@@ -53,6 +47,14 @@ public class NodeGames {
 
         public void setItemPrice(double itemPrice) {
             this.itemPrice = itemPrice;
+        }
+
+        public String getItemName(){
+            return itemName;
+        }
+
+        public double getItemPrice(){
+            return itemPrice;
         }
     }
 }
