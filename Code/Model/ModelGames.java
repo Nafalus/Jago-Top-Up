@@ -66,7 +66,7 @@ public class ModelGames {
                 if (game.getNameGame().equals(nameGame)) {
                     found = true;
                     game.viewGame();
-                    break;
+                    // break;
                 }
             }
             if (!found){
@@ -105,7 +105,10 @@ public class ModelGames {
                     System.out.println("Game Tidak Dapat Ditemukan");
                 }
             }
-        } 
+        }
+        else {
+            System.out.println("List Game Kosong");
+        }
     }
 }
 

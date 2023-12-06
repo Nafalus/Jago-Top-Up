@@ -121,6 +121,6 @@ public class MenuAdmin {
                 break;
         }
         
-    }while(pilih !=6);
+    }while(pilih !=7);
 }
 }
