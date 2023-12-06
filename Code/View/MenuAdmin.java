@@ -56,12 +56,8 @@ public class MenuAdmin {
                 break;
         }
         
-<<<<<<< HEAD
-    }while(pilih !=7);
-=======
     }while(pilih !=6);
 
     input.close();
->>>>>>> d9cb339b8aa6dddc92ee1fb8b229642ffdac4176
 }
 }

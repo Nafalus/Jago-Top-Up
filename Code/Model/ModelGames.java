@@ -126,12 +126,6 @@ public class ModelGames {
         ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
         if (listGames != null) {
             for (NodeGames game : listGames) {
-<<<<<<< HEAD
-                if (game.getNameGame().equals(nameGame)) {
-                    found = true;
-                    game.viewGame();
-                    // break;
-=======
                 if (game.getNameGame().equalsIgnoreCase(nameGame)) {
                     System.out.println("Nama Game: " + game.getNameGame());
                     System.out.println("Nama Currency Game: " + game.getCurrencyName());
@@ -143,7 +137,6 @@ public class ModelGames {
                     break;
                 }else{
                     System.out.println("Game Tidak Dapat Ditemukan");
->>>>>>> d9cb339b8aa6dddc92ee1fb8b229642ffdac4176
                 }
             }
         }
