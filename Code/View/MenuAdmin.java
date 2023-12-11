@@ -1,9 +1,11 @@
 package Code.View;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Code.Model.ModelGames;
 import Code.Model.ModelUser;
 import Code.Node.NodeGames;
+import Code.Node.NodeUser;
 
 public class MenuAdmin {
     ModelGames modelgames = new ModelGames();
@@ -92,16 +94,42 @@ public class MenuAdmin {
                 input.nextLine();
                 System.out.println("Masukkan Nama Game Yang ingin Dihapus : ");
                 String nameGame = input.nextLine();
-                modelgames.DeleteGame(nameGame);
+                boolean deleted = modelgames.DeleteGame(nameGame);
+                if (deleted) {
+                    System.out.println("Game Berhasil Dihapus");
+                }
+                else {
+                    System.out.println("Game Tidak Dapat Ditemukan");
+                }
                 break;
 
             case 4:
                 modelgames.ViewAllGames();
+                if (modelgames.ViewAllGames() != null) {
+                    for (NodeGames game : modelgames.ViewAllGames()) {
+                       System.out.println("Nama Game: " + game.getNameGame());
+                       System.out.println("Nama Currency Game: " + game.getCurrencyName());
+                       System.out.println("Items:");
+                       for (NodeGames.Item item : game.getItems()) {
+                           System.out.println("  - " + item.getItemName() + ": Rp" + item.getItemPrice());
+                       }
+                       System.out.println("--------------------");
+                   }
+               }
                 break;
 
             case 5:
                 System.out.println("LIST USER");
-                modeluser.ViewAllUser();
+                ArrayList <NodeUser> listUser = new ArrayList<>();
+                listUser = modeluser.ViewAllUser();
+                if (listUser != null){
+                    for (NodeUser user : listUser){
+                        System.out.println("Email User : "+user.getEmail());
+                        System.out.println("Password User : "+user.getPass());
+                        System.out.println("Pin User : "+user.getPin());
+                        System.out.println("--------------------");
+                    }
+                }
                 break;
 
             case 6 :

@@ -22,7 +22,7 @@ public class ModelGames {
 
     // Done
     public void addGame(NodeGames paramGames){
-        Scanner input = new Scanner(System.in);
+        // Scanner input = new Scanner(System.in);
         ModelJSONGames modelJSONGames = new ModelJSONGames();
         ArrayList<NodeGames> listGames = modelJSONGames.readFromJSON();
         // buat baca data di database kalo kosong biar gak ngasih [] manual
@@ -47,25 +47,14 @@ public class ModelGames {
         modelJSONGames.writeFileJSON(listGames);
     }
     
-
     // Done
-    public void ViewAllGames() {
+    public ArrayList <NodeGames> ViewAllGames() {
         ArrayList <NodeGames> listGames = new ModelJSONGames().readFromJSON();
-        if (listGames != null) {
-             for (NodeGames game : listGames) {
-                System.out.println("Nama Game: " + game.getNameGame());
-                System.out.println("Nama Currency Game: " + game.getCurrencyName());
-                System.out.println("Items:");
-                for (NodeGames.Item item : game.getItems()) {
-                    System.out.println("  - " + item.getItemName() + ": Rp" + item.getItemPrice());
-                }
-                System.out.println("--------------------");
-            }
-        }
+        return listGames;
     }
 
     // Done
-        public void DeleteGame(String nameGame) {
+        public boolean DeleteGame(String nameGame) {
             ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
             boolean found = false;
             if (listGames != null) {
@@ -74,14 +63,14 @@ public class ModelGames {
                         listGames.remove(games);
                         found = true;
                         new ModelJSONGames().writeFileJSON(listGames);
-                        System.out.println("Game Berhasil Dihapus");
                         break;
                     }
                 }
                 if (!found) {
-                    System.out.println("Game Tidak Ditemukan");
+                    return found;
                 }
             }
+            return found;
         }
 
     
@@ -93,13 +82,8 @@ public class ModelGames {
         if (listGames != null) {
             for (NodeGames game : listGames) {
                 if (game.getNameGame().equalsIgnoreCase(nameGame)) {
-                    // NodeGames paramOut = new NodeGames(null, null);
                     paramOut = game;
                 }
-                // else{
-                //     System.out.println("Game Tidak Dapat Ditemukan");
-                //     return null;
-                // }
             }
             if (found) {
                 return null;

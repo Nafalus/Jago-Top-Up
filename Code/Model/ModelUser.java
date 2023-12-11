@@ -40,16 +40,17 @@ public class ModelUser{
 
 
     // Done
-    public void ViewAllUser(){
+    public ArrayList <NodeUser> ViewAllUser(){
         ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
-        if (listUser != null){
-            for (NodeUser user : listUser){
-                System.out.println("Email User : "+user.getEmail());
-                System.out.println("Password User : "+user.getPass());
-                System.out.println("Pin User : "+user.getPin());
-                System.out.println("--------------------");
-            }
-        }
+        return listUser;
+        // if (listUser != null){
+        //     for (NodeUser user : listUser){
+        //         System.out.println("Email User : "+user.getEmail());
+        //         System.out.println("Password User : "+user.getPass());
+        //         System.out.println("Pin User : "+user.getPin());
+        //         System.out.println("--------------------");
+        //     }
+        // }
     }
 
 
