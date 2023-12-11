@@ -5,24 +5,24 @@ import java.util.Scanner;
 
 import Code.Node.NodeAdmin;
 import Code.Node.NodeUser;
-import Code.View.MenuAdmin;
-import Code.View.MenuUser;
-import Code.Controller.Controller;
+import Code.View.ViewAdmin;
+import Code.View.ViewUser;
+import Code.Controller.ControllerAdmin;
 // import Code.Model.ModelUser;
 import Code.ModelJSON.ModelJSONAdmin;
 import Code.ModelJSON.ModelJSONUser;
 
-public class Login {
+public class ModelLogin {
     ArrayList <NodeUser> dataUser;
     public boolean validAdmin, validUser;
-    MenuUser menuuser = new MenuUser();
-    MenuAdmin menuadmin = new MenuAdmin();
+    ViewUser menuuser = new ViewUser();
+    ViewAdmin menuadmin = new ViewAdmin();
 
-    public Login () {
+    public ModelLogin () {
         validAdmin = false;
         validUser = false;
         this.dataUser = new ArrayList<NodeUser>();
-        Controller temp = new Controller();
+        ControllerAdmin temp = new ControllerAdmin();
         ModelUser tempModelUser = new ModelUser();
         this.dataUser.add(temp.getEmailPass());
         for (int i = 1; i < tempModelUser.getListDataUser().size() + 1; i++) {
@@ -55,28 +55,29 @@ public class Login {
 
     public void ValidasiLogin(){
         Scanner input = new Scanner(System.in);
-         System.out.println("Masukkan Email : ");
-                String email = input.nextLine();
-                System.out.println("Masukkan Password : ");
-                String pass = input.nextLine();
-                ArrayList <NodeUser> listuser = new ModelJSONUser().readFromJSON();
-                if (listuser != null) {
-                    for (NodeUser user : listuser) {
-                        if (user.getEmail().equalsIgnoreCase(email) && user.getPass().equalsIgnoreCase(pass)){
-                            menuuser.menuUser();
-                        }
-                    }
+        System.out.println("Masukkan Email : ");
+        String email = input.nextLine();
+        System.out.println("Masukkan Password : ");
+        String pass = input.nextLine();
+        ArrayList <NodeUser> listuser = new ModelJSONUser().readFromJSON();
+        if (listuser != null) {
+            for (NodeUser user : listuser) {
+                if (user.getEmail().equalsIgnoreCase(email) && user.getPass().equalsIgnoreCase(pass)){
+                    menuuser.menuUser();
                 }
+            }
+        }
 
-                ArrayList <NodeAdmin> listAdmins = new ModelJSONAdmin().readFromJSON();
-                if (listAdmins != null) {
-                    for (NodeAdmin admin : listAdmins) {
-                        if (admin.getemail().equalsIgnoreCase(email) && admin.getPass().equalsIgnoreCase(pass)){
-                            menuadmin.menuAdmin();
-                        }else{
-                            System.out.println("Email atau Password Salah");
-                        }
-                    }
+        ArrayList <NodeAdmin> listAdmins = new ModelJSONAdmin().readFromJSON();
+        if (listAdmins != null) {
+            for (NodeAdmin admin : listAdmins) {
+                if (admin.getemail().equalsIgnoreCase(email) && admin.getPass().equalsIgnoreCase(pass)){
+                    menuadmin.menuAdmin();
+                }else{
+                    System.out.println("Email atau Password Salah");
                 }
+            }
+        }
     }
+    
 }

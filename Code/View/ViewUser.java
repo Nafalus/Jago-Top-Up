@@ -3,7 +3,7 @@ package Code.View;
 import java.util.Scanner;
 
 
-public class MenuUser {
+public class ViewUser {
 
     public void  menuUser() {
         Scanner input = new Scanner(System.in);

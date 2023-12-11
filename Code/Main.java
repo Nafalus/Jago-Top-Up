@@ -1,16 +1,12 @@
 package Code;
 
-import Code.Model.Login;
+import Code.Model.ModelLogin;
 import Code.Model.ModelGames;
 import Code.Model.ModelUser;
-// import Code.Model.ModelAdmin;
-// import Code.Model.ModelUser;
-// import Code.Model.Login;
 import Code.ModelJSON.ModelJSONAdmin;
 import Code.ModelJSON.ModelJSONUser;
-import Code.View.MenuAdmin;
-import Code.View.MenuUser;
-
+import Code.View.ViewAdmin;
+import Code.View.ViewUser;
 import java.util.Scanner;
 
 
@@ -18,11 +14,11 @@ public class Main {
     public static void main(String[] args) {
         ModelGames modelgame = new ModelGames();
         ModelUser modeluser = new ModelUser();
-        MenuAdmin menuadmin = new MenuAdmin();
+        ViewAdmin menuadmin = new ViewAdmin();
         ModelJSONUser modelJSONUser = new ModelJSONUser();
         ModelJSONAdmin modelJSONAdmin = new ModelJSONAdmin();
-        MenuUser menuuser = new MenuUser();
-        Login login = new Login();
+        ViewUser menuuser = new ViewUser();
+        ModelLogin login = new ModelLogin();
         
         Scanner input = new Scanner(System.in);
 
@@ -52,26 +48,7 @@ public class Main {
         }while ( pilih != 3);
 
         input.close();
-
-
-        
-
-
-        // ModelJSONUser modelJSONUser = new ModelJSONUser();
-        // ArrayList <NodeUser> listuser1 = new ArrayList<>();
-        // listuser1.add(new NodeUser("Nopal Penyepong Miku", "Nigga Hitam", 121) );
-        // listuser1.add(new NodeUser("Miku Bitchi", "Nopal Weabo" , 221) );
-        // modelJSONUser.writeFileJSON(listuser1);
-        // modeluser.ViewAllUser();
-        // modeluser.DeleteUser("Nopal Penyepong Miku");
-        // System.out.println("Admin Terdaftar");
-        // modeluser.ViewAllUser();
-
-        // modelgame.ViewAllGames();
-        // menuadmin.menuAdmin();
-        
-        
-}
+    }
 }
 
 

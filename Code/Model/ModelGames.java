@@ -7,80 +7,52 @@ import Code.ModelJSON.ModelJSONGames;
 import Code.Node.NodeGames;
 
 public class ModelGames {
-    public ArrayList<NodeGames> dataGames;
+    private ArrayList<NodeGames> listGame;
+    private ModelJSONGames modelJSONGames;
 
     public ModelGames() {
-        this.dataGames = new ArrayList<>();
+        listGame = new ArrayList<>();
+        modelJSONGames = new ModelJSONGames();
+        loadGame();
     }
 
-
-    // Done
-    public void insertGames(String name, String currencyName) {
-        dataGames.add(new NodeGames(name, currencyName));
+    public void loadGame () {
+        listGame = modelJSONGames.readFromJSON();
     }
-
 
     // Done
     public void addGame(NodeGames paramGames){
-        // Scanner input = new Scanner(System.in);
-        ModelJSONGames modelJSONGames = new ModelJSONGames();
-        ArrayList<NodeGames> listGames = modelJSONGames.readFromJSON();
-        // buat baca data di database kalo kosong biar gak ngasih [] manual
-        if (listGames == null) {
-            listGames = new ArrayList<>();
+        // ArrayList<NodeGames> listGame = new ModelJSONGames().readFromJSON();
+
+        if (listGame == null) {
+            listGame = new ArrayList<>();
         }
 
-        listGames.add(paramGames);
+        listGame.add(paramGames);
         
-        // Cetak Data
-        // System.out.println("LIST ITEM DAN HARGA");
-        // for (NodeGames game : listGames) {
-        //     System.out.println("Game : " + game.nameGame);
-        //     System.out.println("Currency : " + game.currencyName);
-        //     System.out.println("Items:");
-        //     for (NodeGames.Item item : game.getItems()) {
-        //         System.out.println("  - " + item.itemName + ": Rp" + item.itemPrice);
-        //     }
-        //     System.out.println("-----------------------");
-        // }
-        
-        modelJSONGames.writeFileJSON(listGames);
+        new ModelJSONGames().writeFileJSON(listGame);
     }
     
     // Done
     public ArrayList <NodeGames> ViewAllGames() {
-        ArrayList <NodeGames> listGames = new ModelJSONGames().readFromJSON();
-        return listGames;
+        // ArrayList <NodeGames> listGame = new ModelJSONGames().readFromJSON();
+        return listGame;
     }
 
     // Done
-        public boolean DeleteGame(String nameGame) {
-            ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
-            boolean found = false;
-            if (listGames != null) {
-                for (NodeGames games : listGames){
-                    if (games.getNameGame().equalsIgnoreCase(nameGame)) {
-                        listGames.remove(games);
-                        found = true;
-                        new ModelJSONGames().writeFileJSON(listGames);
-                        break;
-                    }
-                }
-                if (!found) {
-                    return found;
-                }
-            }
-            return found;
-        }
+    public void deleteGame(NodeGames paramGame) {
+        // ArrayList<NodeGames> listGame = new ModelJSONGames().readFromJSON();
+        listGame.remove(paramGame);
+        new ModelJSONGames().writeFileJSON(listGame);
+    }
 
-    
     // Done
     public NodeGames searchGame(String nameGame) {
-        ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
+        // ArrayList<NodeGames> listGame = new ModelJSONGames().readFromJSON();
         boolean found = false;
         NodeGames paramOut = new NodeGames(null, null);
-        if (listGames != null) {
-            for (NodeGames game : listGames) {
+        if (listGame != null) {
+            for (NodeGames game : listGame) {
                 if (game.getNameGame().equalsIgnoreCase(nameGame)) {
                     paramOut = game;
                 }
@@ -96,9 +68,9 @@ public class ModelGames {
     // Done
     public void updateItemPrice(NodeGames paramGames) {
         Scanner input = new Scanner(System.in);
-        ArrayList<NodeGames> listGames = new ModelJSONGames().readFromJSON();
-        if (listGames != null) {
-            for (NodeGames game : listGames) {
+        // ArrayList<NodeGames> listGame = new ModelJSONGames().readFromJSON();
+        if (listGame != null) {
+            for (NodeGames game : listGame) {
                 if (game.getNameGame().equalsIgnoreCase(paramGames.getNameGame())) {
                     game = paramGames;
                     // for (NodeGames.Item item : game.getItems()) {
@@ -114,7 +86,7 @@ public class ModelGames {
                     //         System.out.println("Item Tidak Ditemukan");
                     //     }
                     // }
-                    new ModelJSONGames().writeFileJSON(listGames);
+                    new ModelJSONGames().writeFileJSON(listGame);
                     break;
                 }
             }
@@ -123,5 +95,16 @@ public class ModelGames {
             System.out.println("List Game Kosong");
         }
     }
+
+    public NodeGames getGame (String gameName) {
+        NodeGames gameKosong = null;
+        for (NodeGames game : listGame) {
+            if (game.getNameGame().equalsIgnoreCase(gameName)) {
+                return game;
+            }
+        }
+        return gameKosong;
+    }
+
 }
 

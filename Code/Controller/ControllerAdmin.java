@@ -7,8 +7,8 @@ import Code.Node.NodeAdmin;
 // import Code.Node.NodeGames;
 import Code.Node.NodeUser;
 
-public class Controller {
-    public NodeAdmin dataControllerAdmin = new NodeAdmin("paijo123@gmail.com", "mikumylove");
+public class ControllerAdmin {
+    private NodeAdmin dataControllerAdmin = new NodeAdmin("paijo123@gmail.com", "mikumylove");
 
     public NodeAdmin getDataAdmin () {
         return this.dataControllerAdmin;

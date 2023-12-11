@@ -4,15 +4,15 @@ import java.util.ArrayList;
  
 // import Node
 import Code.Node.NodeAdmin;
-import Code.Controller.Controller;
+import Code.Controller.ControllerAdmin;
 import Code.ModelJSON.ModelJSONAdmin;
 public class ModelAdmin{
     public ArrayList <NodeAdmin> dataAdmin;
-    Controller firstData;
+    ControllerAdmin firstData;
 
     public ModelAdmin(){
         this.dataAdmin = new ArrayList<>();
-        this.firstData = new Controller();
+        this.firstData = new ControllerAdmin();
         this.dataAdmin.addFirst(firstData.getDataAdmin());
     }
 
