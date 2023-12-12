@@ -1,9 +1,16 @@
 package Code.View;
 
 import java.util.Scanner;
-
+import Code.Controller.ControllerUser;
+import Code.Controller.ControllerGames;
 
 public class ViewUser {
+    // private ControllerUser controllerUser;
+    private ControllerGames controllerGame;
+
+    public ViewUser (ControllerGames controllerGame) {
+        this.controllerGame =  controllerGame;
+    }
 
     public void  menuUser() {
         Scanner input = new Scanner(System.in);

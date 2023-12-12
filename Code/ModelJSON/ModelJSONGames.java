@@ -46,14 +46,14 @@ public class ModelJSONGames {
                 objGame.put("nameGame", game.nameGame);
                 objGame.put("currencyGame", game.currencyName);
 
-                JSONArray itemsArray = new JSONArray();
-                for (NodeGames.Item item : game.getItems()) {
-                    JSONObject objItem = new JSONObject();
-                    objItem.put("itemName", item.itemName);
-                    objItem.put("itemPrice", item.itemPrice);
-                    itemsArray.add(objItem);
-                }
-                objGame.put("items", itemsArray);
+                // JSONArray itemsArray = new JSONArray();
+                // for (NodeGames.Item item : game.getItems()) {
+                //     JSONObject objItem = new JSONObject();
+                //     objItem.put("itemName", item.itemName);
+                //     objItem.put("itemPrice", item.itemPrice);
+                //     itemsArray.add(objItem);
+                // }
+                // objGame.put("items", itemsArray);
 
                 arrayGame.add(objGame);
             }
@@ -105,19 +105,20 @@ public class ModelJSONGames {
                 JSONObject jsonGame = (JSONObject) objGame;
                 String nameGame = jsonGame.get("nameGame").toString();
                 String currencyName = jsonGame.get("currencyGame").toString();
-                NodeGames item = new NodeGames(nameGame, currencyName);
+                // NodeGames item = new NodeGames(nameGame, currencyName);
 
-                JSONArray jsonItems = (JSONArray) jsonGame.get("items");
-                if (jsonItems != null) {
-                    for (Object objItem : jsonItems) {
-                        JSONObject jsonItem = (JSONObject) objItem;
-                        String itemName = jsonItem.get("itemName").toString();
-                        double itemPrice = Double.parseDouble(jsonItem.get("itemPrice").toString());
-                        item.addItem(itemName, itemPrice);
-                    }
-                }
+                // JSONArray jsonItems = (JSONArray) jsonGame.get("items");
+                // if (jsonItems != null) {
+                //     for (Object objItem : jsonItems) {
+                //         JSONObject jsonItem = (JSONObject) objItem;
+                //         String itemName = jsonItem.get("itemName").toString();
+                //         double itemPrice = Double.parseDouble(jsonItem.get("itemPrice").toString());
+                //         item.addItem(itemName, itemPrice);
+                //     }
+                // }
 
-                listGame.add(item);
+                // listGame.add(item);
+                listGame.add(new NodeGames(nameGame, currencyName));
             }
             return listGame;
         }

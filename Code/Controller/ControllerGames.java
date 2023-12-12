@@ -16,14 +16,18 @@ public class ControllerGames {
     private ModelGames model;
     // private Scanner input;
 
-    public ControllerGames (){
-        this.model = new ModelGames();
+    public ControllerGames (ModelGames model){
+        this.model = model;
         // this.model = model;
         // this.input = new Scanner(System.in);
     }
     
-    public void addGame (NodeGames paramGames) {
-        model.addGame(paramGames);
+
+    public ArrayList <NodeGames> viewGames(){
+        return model.ViewAllGames();
+    }
+    public void addGame (String gameName, String currencyName) {
+        model.addGame(gameName, currencyName);
     }
 
     public void deleteGame (String gameName) {
@@ -35,5 +39,24 @@ public class ControllerGames {
             model.deleteGame(game);
         }
     }
+    
+    public NodeGames searchGame (String nameGame){
+        return model.getGame(nameGame);
+    }
+
+    public void updateGame(String nameGame,String newnameGame,String currencyName){
+        NodeGames games = model.getGame(nameGame);
+        if (games == null){
+            System.out.println("Game Tidak DItemukan");
+        }else{
+            games.nameGame = newnameGame;
+            games.currencyName = currencyName;
+            model.updateGame(games);
+        }
+    }
+
+
+
+
 
 }

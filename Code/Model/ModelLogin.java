@@ -15,20 +15,21 @@ import Code.ModelJSON.ModelJSONUser;
 public class ModelLogin {
     ArrayList <NodeUser> dataUser;
     public boolean validAdmin, validUser;
-    ViewUser menuuser = new ViewUser();
-    ViewAdmin menuadmin = new ViewAdmin();
+    ViewUser menuuser ;
+    ViewAdmin menuAdmin ;
+    // ViewAdmin menuadmin = new ViewAdmin();
 
-    public ModelLogin () {
-        validAdmin = false;
-        validUser = false;
-        this.dataUser = new ArrayList<NodeUser>();
-        ControllerAdmin temp = new ControllerAdmin();
-        ModelUser tempModelUser = new ModelUser();
-        this.dataUser.add(temp.getEmailPass());
-        for (int i = 1; i < tempModelUser.getListDataUser().size() + 1; i++) {
-            this.dataUser.add(i, null);
-        }
-    }
+    // public ModelLogin () {
+    //     validAdmin = false;
+    //     validUser = false;
+    //     this.dataUser = new ArrayList<NodeUser>();
+    //     ControllerAdmin temp = new ControllerAdmin();
+    //     ModelUser tempModelUser = new ModelUser();
+    //     this.dataUser.add(temp.getEmailPass());
+    //     for (int i = 1; i < tempModelUser.getListDataUser().size() + 1; i++) {
+    //         this.dataUser.add(i, null);
+    //     }
+    // }
 
     public void Validasi () {
         Scanner input = new Scanner(System.in);
@@ -54,10 +55,27 @@ public class ModelLogin {
     }
 
     public void ValidasiLogin(){
+        // String email = null;
+        // String pass = null;
         Scanner input = new Scanner(System.in);
         System.out.println("Masukkan Email : ");
+        // try {
+        //     // pilih = input.nextInt();
+        //     email = input.nextLine();
+
+        //     } catch (Exception e){
+        //         System.out.println(e);
+        //     }
         String email = input.nextLine();
         System.out.println("Masukkan Password : ");
+        // try {
+        //     // pilih = input.nextInt();
+        //     // email = input.nextLine();
+        //     pass = input.nextLine();
+
+        //     } catch (Exception e){
+        //         System.out.println(e);
+        //     }
         String pass = input.nextLine();
         ArrayList <NodeUser> listuser = new ModelJSONUser().readFromJSON();
         if (listuser != null) {
@@ -72,12 +90,11 @@ public class ModelLogin {
         if (listAdmins != null) {
             for (NodeAdmin admin : listAdmins) {
                 if (admin.getemail().equalsIgnoreCase(email) && admin.getPass().equalsIgnoreCase(pass)){
-                    menuadmin.menuAdmin();
+                    menuAdmin.menuAdmin();
                 }else{
                     System.out.println("Email atau Password Salah");
                 }
             }
         }
     }
-    
 }

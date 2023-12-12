@@ -1,21 +1,19 @@
 package Code.View;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Code.Model.ModelGames;
-import Code.Model.ModelUser;
-import Code.Node.NodeGames;
-import Code.Node.NodeUser;
 import Code.Controller.ControllerGames;
+import Code.Node.NodeGames;
 
 public class ViewAdmin {
-    private ModelGames modelgames = new ModelGames();
-    private ModelUser modeluser = new ModelUser();
-    private ControllerGames controller = new ControllerGames();
+    // private ModelGames modelgames = new ModelGames();
+    // private ModelUser modeluser = new ModelUser();
+    private ControllerGames controller;
 
-    // public ViewAdmin (ControllerGames controller){
-    //     this.controller = controller;
-    // }
+    public ViewAdmin (ControllerGames controller) {
+        this.controller = controller;
+    }
 
     public void menuAdmin(){
         Scanner input = new Scanner(System.in);
@@ -35,62 +33,22 @@ public class ViewAdmin {
             switch (pilih) {
                 case 1:
                     input.nextLine();
-                    NodeGames newGame = new NodeGames(null, null);
-                    System.out.println("Masukkan Nama Game Baru : ");
-                    newGame.nameGame = input.nextLine();
-                    System.out.println("Masukkan Currency Game Baru : ");
-                    newGame.currencyName = input.nextLine();
-
-                    // Tambah item & harga
-                    boolean tambahItem = true;
-                    while (tambahItem) {
-                        System.out.println("Masukkan Nama Item : ");
-                        String itemName = input.nextLine();
-                        double itemPrice = 0;
-
-                        boolean validInput = false;
-                        while (!validInput) {
-                            System.out.println("Masukkan Harga Item : ");
-                            String inputPrice = input.nextLine();
-                        
-                            if (inputPrice.matches("\\d+(\\.\\d+)?")) {
-                                itemPrice = Double.parseDouble(inputPrice);
-                                validInput = true;
-                            } else {
-                                System.out.println("Harga harus berupa angka. Silakan coba lagi.");
-                            }
-                        }
-                        
-
-                        // Tambah item game
-                        newGame.addItem(itemName, itemPrice);
-
-                        System.out.println("Tambah item lagi? (y/n): ");
-                        String tambahLagi = input.nextLine();
-                        tambahItem = tambahLagi.equalsIgnoreCase("y");
-                    }
-                    controller.addGame(newGame);
+                    System.out.println("Masukkan Nama Game : ");
+                    String gameName = input.nextLine();
+                    System.out.println("Masukkan Nama Currency Game : ");
+                    String currencyName = input.nextLine();
+                    controller.addGame(gameName, currencyName);
                     break;
                     
                 case 2:
                     input.nextLine();
-                    System.out.println("Masukkan Nama Game Yang ingin DiEdit : ");
-                    String namegame = input.nextLine();
-                    NodeGames paraGames = modelgames.searchGame(namegame);
-                    for (NodeGames.Item item : paraGames.getItems()) {
-                        System.out.println("Masukkan Nama item : ");
-                        String itemName = input.nextLine();
-                        if (item.itemName.equalsIgnoreCase(itemName)) {
-                            input.nextLine();
-                            System.out.println("Masukkan Harga Baru : ");
-                            double newPrice = input.nextDouble();
-                            item.setItemPrice(newPrice);
-                            break;
-                        }else{
-                            System.out.println("Item Tidak Ditemukan");
-                        }
-                    }
-                    modelgames.updateItemPrice(paraGames);
+                    System.out.println("Masukkan Nama Game yng ingin Diedit");
+                    String oldName = input.nextLine();
+                    System.out.println("Masukkan Nama Game Baru");
+                    String newName = input.nextLine();
+                    System.out.println("Masukkan Nama Currency Baru");
+                    String newcurrency = input.nextLine();
+                    controller.updateGame(oldName, newName, newcurrency);
                     break;
 
                 case 3:
@@ -107,49 +65,45 @@ public class ViewAdmin {
                     break;
 
                 case 4:
-                    modelgames.ViewAllGames();
-                    if (modelgames.ViewAllGames() != null) {
-                        for (NodeGames game : modelgames.ViewAllGames()) {
-                        System.out.println("Nama Game: " + game.getNameGame());
-                        System.out.println("Nama Currency Game: " + game.getCurrencyName());
-                        System.out.println("Items:");
-                        for (NodeGames.Item item : game.getItems()) {
-                            System.out.println("  - " + item.getItemName() + ": Rp" + item.getItemPrice());
-                        }
-                        System.out.println("--------------------");
+                    System.out.println("Daftar Game");
+                    for (NodeGames game : controller.viewGames()) {
+                        System.out.println("Nama game : " + game.nameGame);
+                        System.out.println("Nama Currency :" + game.currencyName);
                     }
-                }
                     break;
 
                 case 5:
-                    System.out.println("LIST USER");
-                    ArrayList <NodeUser> listUser = new ArrayList<>();
-                    listUser = modeluser.ViewAllUser();
-                    if (listUser != null){
-                        for (NodeUser user : listUser){
-                            System.out.println("Email User : "+user.getEmail());
-                            System.out.println("Password User : "+user.getPass());
-                            System.out.println("Pin User : "+user.getPin());
-                            System.out.println("--------------------");
-                        }
-                    }
+                    // System.out.println("LIST USER");
+                    // ArrayList <NodeUser> listUser = new ArrayList<>();
+                    // listUser = modeluser.ViewAllUser();
+                    // if (listUser != null){
+                    //     for (NodeUser user : listUser){
+                    //         System.out.println("Email User : "+user.getEmail());
+                    //         System.out.println("Password User : "+user.getPass());
+                    //         System.out.println("Pin User : "+user.getPin());
+                    //         System.out.println("--------------------");
+                    //     }
+                    // }
+                    System.out.println("Belum Selesai");
                     break;
 
                 case 6 :
                     input.nextLine();
                     System.out.println("Masukkan Nama Game Yang ingin dicari : ");
                     String nameGameSearch = input.nextLine();
-                    System.out.println("Nama Game : " + modelgames.searchGame(nameGameSearch).nameGame);
-                    System.out.println("Nama Currency Game : " + modelgames.searchGame(nameGameSearch).getCurrencyName());
-                    System.out.println("Daftar Item : ");
-                    for (NodeGames.Item item : modelgames.searchGame(nameGameSearch).getItems()) {
-                        System.out.println("  - " + item.getItemName() + ": Rp" + item.getItemPrice());
+                    NodeGames games = controller.searchGame(nameGameSearch);
+                    if (games == null){
+                        System.out.println("Game Tidak Ada");
+                    }else{
+                        System.out.println("Nama Game : "+games.nameGame);
+                        System.out.println("Nama Currency : "+games.currencyName);
                     }
                     break;
 
-                // case 6:
-                //     System.out.println("Log Out");
-                //     break;
+                case 7:
+                    System.out.println("Log Out");
+                    break;
+                    
                 default:
                     System.out.println("Pilih menu yang tersedia");
                     break;
@@ -158,6 +112,7 @@ public class ViewAdmin {
         }while(pilih !=7);
 
     input.close();
+    // modelgames.commit();
     }
 
 }

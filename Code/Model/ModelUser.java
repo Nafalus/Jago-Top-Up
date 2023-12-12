@@ -20,25 +20,26 @@ public class ModelUser{
     //     dataUser.add(new NodeUser (email,pass,pin));
     // }
     
-   public void daftarAkun() {
-        ModelJSONUser modelJsonUser = new ModelJSONUser();
-        ArrayList<NodeUser> listUser = modelJsonUser.readFromJSON();
-
-        if (listUser == null) {
-            listUser = new ArrayList<>();
+    public ArrayList <NodeUser> getListUsers(){
+        return dataUser;    
         }
-        NodeUser newUser = new NodeUser(null,null,0);
-        System.out.println("Masukkan Email");
-        newUser.email = input.nextLine();
-        System.out.println("Masukkan Password");
-        newUser.pass = input.nextLine();
-        System.out.println("Masukkan PIN");
-        newUser.pin = input.nextInt();
-        listUser.add(newUser);
-        modelJsonUser.writeFileJSON(listUser);
+
+   public void addUser(String email,String pass,int pin){
+        NodeUser User = new NodeUser(email,pass,pin);
+        dataUser.add(User);    
+   }
+
+
+
+    public NodeUser getUser(String email){
+        NodeUser listUser = null;
+        for (NodeUser User : dataUser){
+            if (User.email == email){
+                return User;
+            }
+        }
+        return listUser;
     }
-
-
     // Done
     public ArrayList <NodeUser> ViewAllUser(){
         ArrayList <NodeUser> listUser = new ModelJSONUser().readFromJSON();
@@ -55,23 +56,10 @@ public class ModelUser{
 
 
     // Done
-    public void DeleteUser(String email) {
-        ArrayList<NodeUser> listUser = new ModelJSONUser().readFromJSON();
-        if (listUser != null) {
-            for (NodeUser user : listUser) {
-                if (email.equals(user.getEmail())) {
-                    listUser.remove(user);
-                    new ModelJSONUser().writeFileJSON(listUser);
-                    System.out.println("User Berhasil Dihapus");
-                    break;
-                }
-            }
-        }
+    public void deleteUser(NodeUser User){
+        dataUser.remove(User);
     }
     
 
 
-    public ArrayList<NodeUser> getListDataUser () {
-        return this.dataUser;
-    }
 }
